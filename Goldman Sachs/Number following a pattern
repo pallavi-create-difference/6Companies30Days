@@ -1,0 +1,33 @@
+class Solution{   
+public:
+    string printMinNumberForPattern(string s){
+        string ans="";
+        int num=1;
+        string temp="";
+        for(int i=0;i<s.size();i++){
+            
+            if(s[i]=='I'){
+                
+                ans+=to_string(num);
+                num++;
+                if(temp.size()>0){
+                    //temp+=to_string(num);
+                    reverse(temp.begin(),temp.end());
+                    ans+=temp;
+                    //num++;
+                    temp="";
+                }
+            }
+            else{
+                temp+=to_string(num);
+                num++;
+            }
+        }
+        if(temp.size()>0 || ans.size()<s.size()+1){
+            temp+=to_string(num);
+            reverse(temp.begin(),temp.end());
+                    ans+=temp;
+                }
+                return ans;
+    }
+};
