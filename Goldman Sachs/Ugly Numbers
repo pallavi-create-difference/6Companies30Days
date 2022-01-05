@@ -1,0 +1,24 @@
+class Solution{
+public:	
+	// #define ull unsigned long long
+	/* Function to get the nth ugly number*/
+	ull getNthUglyNo(int n) {
+	    ull arr[n+1];
+	    arr[0]=1;
+	    ull a1=0,a2=0,a3=0;
+	    for(int i=1;i<=n;i++){
+	        ull cur=min(2*arr[a1],min(3*arr[a2],5*arr[a3]));
+	        arr[i]=cur;
+	        if(cur==2*arr[a1]){
+	            a1++;
+	        }
+	        if(cur==3*arr[a2]){
+	            a2++;
+	        }
+	        if(cur==5*arr[a3]){
+	            a3++;
+	        }
+	    }
+	    return arr[n-1];
+	}
+};
