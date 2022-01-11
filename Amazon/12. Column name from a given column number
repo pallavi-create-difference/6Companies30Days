@@ -1,0 +1,23 @@
+class Solution{
+    public:
+    string colName (long long int n)
+    {
+        // your code here
+        string ans="";
+        while(n>0){
+            int r=n%26;
+            char ch;
+            if(r==0){
+               ch='Z'; 
+               n=n/26;
+               n--;
+            }
+            else{
+                ch='A'+(r-1);
+                n=n/26;
+            }
+            ans=ch+ans;
+        }
+        return ans;
+    }
+};
