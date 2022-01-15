@@ -1,4 +1,4 @@
-Class Solution{
+class Solution{
     public:
     
     void solve(int src, vector<int>& visited, vector<int>& topo, vector<int> adj[]){
