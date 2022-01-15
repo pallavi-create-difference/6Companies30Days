@@ -1,0 +1,15 @@
+class Solution{
+public:
+
+
+    int minSteps(int D){
+        int sum=0;
+        int step=0;
+        while(sum<D){
+            step++;
+            sum+=step;
+        }
+        int ans=(sum-D)%2==0?step:step%2==0?step+1:step+2;
+        return ans;
+    }
+};
