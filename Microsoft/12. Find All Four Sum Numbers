@@ -1,0 +1,42 @@
+class Solution {
+    public ArrayList<ArrayList<Integer>> fourSum(int[] arr, int k) {
+        ArrayList<ArrayList<Integer>> list=new ArrayList<ArrayList<Integer>>();
+        
+        int n=arr.length;
+        Arrays.sort(arr);
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int req_sum=k-(arr[i]+arr[j]);
+                int left=j+1;
+                int right=n-1;
+                while(left<right){
+                    int cur_sum=arr[left]+arr[right];
+                    if(cur_sum<req_sum){
+                        left++;
+                    }
+                    else if(cur_sum>req_sum){
+                        right--;
+                    }
+                  else{
+                   ArrayList<Integer> l=new ArrayList<>();
+                   l.add(arr[i]);
+                   l.add(arr[j]);
+                   l.add(arr[left]);
+                   l.add(arr[right]);
+                   list.add(l);
+                   while(left<right && arr[left]==l.get(2)) left++;
+                   while(left<right  && arr[right]==l.get(3))right--;
+                   
+               }
+               
+                }
+         
+        while(j+1<n && arr[j+1]==arr[j])j++;
+       
+            }
+            while(i+1<n && arr[i+1]==arr[i])i++;
+        }
+        return list;
+        
+    }
+}
