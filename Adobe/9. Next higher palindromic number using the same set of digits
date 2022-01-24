@@ -1,0 +1,21 @@
+class Solution{
+  public:
+    string nextPalin(string n) { 
+        //complete the function here
+        int len=n.size();
+        if(len<=3)return "-1";
+        string hlf=n.substr(0,len/2);
+        bool odd=true;
+        if(len%2==0)odd=false;
+        if(next_permutation( hlf.begin() , hlf.end())){
+            string ans=hlf;
+            if(odd){
+                ans+=n[len/2];
+            }
+            reverse(hlf.begin(),hlf.end());
+            ans+=hlf;
+            return ans;
+        }
+        return "-1";
+    }
+};
