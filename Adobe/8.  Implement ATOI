@@ -1,0 +1,25 @@
+class Solution{
+  public:
+    /*You are required to complete this method */
+    int atoi(string s) {
+        //Your code here
+        int i=0;
+        while(s[i]==' ' && i<s.size()){
+            i++;
+        }
+        int sign=1;
+        if(s[i]=='-' || s[i]=='+'){
+        sign=(s[i]=='-')?-1:1;
+        i++;}
+        long long int ans=0;
+        int j=0;
+        for(j=i;j<s.length();j++){
+            if(!isdigit(s[j]))break;
+          ans=ans*10+(s[j]-'0')*sign;
+          if(ans>INT_MAX)return INT_MAX;
+          if(ans<INT_MIN)return INT_MIN;  
+        }
+        if(j!=s.length())return -1;
+        return ans;
+    }
+};
