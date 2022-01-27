@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        //BFS code
+        vector<vector<int>> graph(numCourses);
+        vector<int> depend(numCourses,0),ans;
+        
+        for(auto x:prerequisites){
+            graph[x[1]].push_back(x[0]);
+            depend[x[0]]++;
+        }
+        queue<int> q;
+        for(int i=0;i<numCourses;i++){
+            if(depend[i]==0)q.push(i);
+        }
+        while(!q.empty()){
+            int temp=q.front();
+            q.pop();
+            ans.push_back(temp);
+            for(auto i:graph[temp]){
+                if(--depend[i]==0)q.push(i);
+            }
+        }
+        return ans.size()==numCourses?ans:vector<int>();//checking the existance of cycle
+      
+    }
+};
