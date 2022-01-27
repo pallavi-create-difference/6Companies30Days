@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minSwaps(vector<vector<int>>& grid) {
+        int n=grid.size();
+        vector<int> v(n,0);
+        for(int i=0;i<n;i++){
+        for(int j=n-1;j>=0;j--){
+            if(grid[i][j]==0){
+                v[i]++;//counting the trailing zeros
+            }
+            else{
+                break;
+            }
+        }
+        }
+        int ans=0;
+        for(int i=0;i<n;i++){
+            int k=i;
+            int req=n-1-i;// desired trailing zeros for ith row
+            while(k<n && v[k]<req)k++;// finding the row to exchange with ith row
+            if(k==n)return -1;//fail to search the row
+            ans+=k-i;//swaps to move the ith row with kth
+            while(k>i){
+                v[k]=v[k-1];//swaping of rows one by one 
+                k--;
+            }
+        }
+        return ans;
+        
+    }
+};
