@@ -1,0 +1,40 @@
+bool is(vector<int>& wt,int mid,int d)
+    {
+        int D=1,s=0;
+        for(auto x:wt)
+        {
+            s+=x;
+            if(s>mid)
+            {
+                D++;
+                s=x;
+            }
+        }
+        return D<=d;
+    }
+    int shipWithinDays(vector<int>& wt, int d) {
+        int left=0;
+        int s=0;
+        for(auto x:wt)
+        {
+            left=max(left,x);
+            s+=x;
+        }
+        if(wt.size()<=d)
+            return left;
+        int l=left,h=s,ans=0;
+        while(l<=h)
+        {
+            int mid=l+(h-l)/2;
+            if(is(wt,mid,d))
+            {
+                ans=mid;
+                h=mid-1;
+            }
+            else
+            {
+                l=mid+1;
+            }
+        }
+        return ans;
+    }
