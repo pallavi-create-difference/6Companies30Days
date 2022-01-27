@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        //BFS Graph code
+        int n=isConnected.size();
+        vector<vector<int>> adj(n);
+        vector<bool> vis(n,false);
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(i!=j && isConnected[i][j]==1){
+                    adj[i].push_back(j);
+                }
+            }
+        }
+        queue<int> q;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                q.push(i);
+                ans++;
+                vis[i]=true;
+            }
+            while(!q.empty()){
+                int temp=q.front();
+                q.pop();
+                for(auto con:adj[temp]){
+                    if(!vis[con]){
+                        vis[con]=true;
+                        q.push(con);
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
