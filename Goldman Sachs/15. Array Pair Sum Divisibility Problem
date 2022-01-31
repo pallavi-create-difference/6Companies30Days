@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    bool canPair(vector<int> arr, int k) {
+        
+        unordered_map<int,vector<int>> mp;
+        for(auto it: arr)
+            mp[it%k].push_back(it);
+        
+        for(auto it:mp)
+        {
+            if(it.first==0 )
+            {
+                if(it.second.size()%2!=0)
+                return false;
+            }
+            else
+            {
+            if(mp.find(k-it.first)==mp.end()) return false;
+            if(it.second.size()!=mp[k-it.first].size()) return false;
+            }}
+            return true;
+    }
+};
