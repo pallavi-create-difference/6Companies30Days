@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int solve(vector<int>& piles,int i,int j,map<pair<int,int>,int>& mp){
+        if(i==j)return piles[i];
+        if(j-i==1)return piles[i]>piles[j]?piles[i]:piles[j];
+        if(i>j)return 0;
+        pair<int,int> key=make_pair(i,j);
+        if(mp.find(key)!=mp.end()){
+            return mp[key];
+        }
+        int ans=max(piles[i]+min(solve(piles,i+2,j,mp),solve(piles,i+1,j-1,mp)),
+                   piles[j]+min(solve(piles,i+1,j-1,mp),solve(piles,i,j-2,mp)));
+        mp[key]=ans;
+        return ans;
+    }
+    bool stoneGame(vector<int>& piles) {
+        map<pair<int,int>,int> mp;
+        int total=0;
+        for(int i=0;i<piles.size();i++){
+            total+=piles[i];
+        }
+        int alice=solve(piles,0,piles.size()-1,mp);
+        int bob=total-alice;
+        if(alice>bob){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
