@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if (divisor == 1) return dividend;
+        if (divisor==-1 && dividend==INT_MIN) return INT_MAX;
+        if (dividend == 0) return 0;
+        int sign = 1;
+        if (dividend >0) {
+            dividend = -dividend;
+            if (divisor > 0)
+                divisor = -divisor;
+            else
+                sign = -1;
+        }
+        else{
+            if (divisor > 0){
+                sign=-1;
+                divisor = -divisor;
+            }
+        }
+        
+        int residual = dividend;
+        int ans=0;
+        while (residual <= divisor){
+            int tmp_ans=1;
+            int tmp_sum=divisor;
+            while (tmp_sum > INT_MIN/2 && tmp_sum+tmp_sum > residual ){
+                tmp_sum += tmp_sum;
+                tmp_ans +=tmp_ans;
+            }
+            residual -= tmp_sum;
+            ans+=tmp_ans;
+        }
+        return ans*sign;
+        
+    }
+};
